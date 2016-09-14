@@ -1,0 +1,26 @@
+.grid{
+	border: 8px solid blue;
+	border-radius: 10px;
+	margin: auto;
+
+	display: flex;
+	align-items: flex-start;
+	flex-wrap: wrap;
+	background-color: yellow;
+
+	position: relative;
+}
+
+canvas{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 1;
+}
+
+.grid div{
+	border: 6px solid blue;
+	z-index: 2;
+}
