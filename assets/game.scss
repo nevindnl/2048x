@@ -16,6 +16,7 @@ button{
 	font-size: 16px;
 	background-color: transparent;
 	color: white;
+	cursor: pointer;
 }
 
 .header-container{
@@ -232,6 +233,10 @@ button{
 		letter-spacing: normal;
 	}
 
+	a{
+		margin: auto;
+	}
+
 	img{
 		height: 40px;
 		width: 40px;
@@ -254,12 +259,12 @@ button{
 		font-weight: 200;
 		text-align: center;
 		letter-spacing: 1px;
-	}
 
-	a{
-		color: white;
-		font-weight: 400;
-		letter-spacing: 0;
-		font-size: 14px;
+		a{
+			color: white;
+			font-weight: 400;
+			letter-spacing: 0;
+			font-size: 14px;
+		}
 	}
 }
