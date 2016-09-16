@@ -2,67 +2,144 @@
 
 [live](https://nevindnl.github.io/2048x)
 
-### Background
+2048x is a spinoff of the popular web game 2048, allowing the player to adjust the number base and grid size. It was made with JavaScript, HTML5/CSS3, and some jQuery.
 
-2048 is a single-player game played on a 4x4 grid. At the start, the grid is populated with two 2 blocks. The player can tilt the board up, down, left, or right, and pieces will slide as far as they can go in their respective rows and columns. If two pieces with the same power of 2 on them slide together, they are combined into one block that contains the next power of 2. After each tilt which moves pieces, another 2 block or 4 block is added to the grid.
+![image of splash](./screenshots/splash.png)
+![image of 7](./screenshots/7.png)
+![image of 40](./screenshots/40.png)
 
-The goal of the game is to form a 2048 block, that is, a block with 2^10. The game is lost if the grid becomes filled.
+### Implementation
+* [Cell][cell]
+  * Stores value and position on grid, as well as drawing logic.
+* [Board][board]
+  * Stores grid, tilting logic, and game termination logic.
+* [Game][game]
+  * Stores game options, draws and installs event handlers on container, and handles player interaction logic.
 
-### Functionality & MVP  
+  [cell]: ./lib/cell.js
+  [board]: ./lib/board.js
+  [game]: ./lib/game.js
 
-Users will be able to:
+Tilting was implemented by mapping the grid, according to the tilt direction, to a grid to be left-tilted, left-tilting, and then undoing the isomorphism.
 
-- [ ] Start and reset the game board
-- [ ] See score and best score
-- [ ] Change grid size
-- [ ] Change base value
+```Javascript
+tilt(i, j){
+	function toLeft(){
+		if (j !== 0){
+			this.grid = Util.transpose(this.grid);
+		}
+		if (i + j > 0){
+			this.grid = this.grid.map(row => row.reverse());
+		}
+	}
 
-In addition, this project will include:
+	function fromLeft(){
+		if (i + j > 0){
+			this.grid = this.grid.map(row => row.reverse());
+		}
+		if (j !== 0){
+			this.grid = Util.transpose(this.grid);
+		}
+	}
 
-- [ ] A How to Play section
-- [ ] A production Readme
+	toLeft.call(this);
+	this.leftTilt();
+	fromLeft.call(this);
+}
 
-### Wireframes
+leftTilt(){
+	this.grid = this.grid.map(row => {
+		//remove spaces
+		const tilted = row.filter(cell => cell.n !== -1);
 
-This app will consist of a single screen with game board and nav links to the Github and my LinkedIn.  There will be a New Game button, score icons, and inputs for grid size and base value.  
+		//merge
+		let j = 0;
+		while(j < tilted.length - 1){
+			let [cell, nextCell] = tilted.slice(j, j + 2);
 
-![wireframes](./wireframe.jpg)
+			if (cell.n === nextCell.n){
+				cell.n += 1;
+				cell.merged = true;
+				tilted.splice(j + 1, 1);
+			}
 
-### Architecture and Technologies
+			j += 1;
+		}
 
-This project will be implemented with the following technologies:
+		//append spaces as needed
+		while(tilted.length < this.size){
+			tilted.push(new Cell(-1));
+		}
 
-- Vanilla JavaScript and `jquery` for overall structure and game logic,
-- `Easel.js` with `HTML5 Canvas` for DOM manipulation and rendering,
-- Webpack to bundle and serve up the various scripts.
+		return tilted;
+	});
+}
+```
 
-In addition to the webpack entry file, there will be three scripts involved in this project:
+DOM methods were used to render the grid:
 
-`board.js`: this script will handle the logic for creating and updating the necessary `Easel.js` elements and rendering them to the DOM.
+```Javascript
+drawGrid(){
+	document.querySelectorAll('.grid-container div').forEach(div => {
+		div.remove();
+	});
 
-`game.js`: this script will handle the logic behind the scenes.  A Game object will hold `size` and `base` attributes and a 2D array of `Cell`s.  It will be responsible for doing neighbor checks for each `Cell` upon iteration and updating the `Cell` array appropriately.
+	document.getElementsByClassName('grid-container')[0].style.width = this.dim + 'px';
+	document.getElementsByClassName('grid-container')[0].style.height = this.dim + 'px';
+	document.getElementsByTagName('canvas')[0].height = this.dim;
+	document.getElementsByTagName('canvas')[0].width = this.dim;
 
-`cell.js`: this lightweight script will house the constructor and update functions for the `Cell` objects.  Each `Cell` will contain a `number`.
+	const cellDim = this.cellDim - 2 * this.cellBorder + 'px';
+	for (let i = 0; i < Math.pow(this.size, 2); i++){
+		const div = document.createElement('div');
+		div.style.width = cellDim;
+		div.style.height = cellDim;
+		div.style.border = `${this.cellBorder}px solid #6ccbf9`;
+		document.getElementsByClassName('grid-container')[0].appendChild(div);
+	}
+}
+```
 
-### Implementation Timeline
+whereas HTML5 Canvas was used to render individual cells.
 
-**Day 1**: Setup all necessary Node modules, including getting webpack up and running and `Easel.js` installed.  Create `webpack.config.js` as well as `package.json`.  Write a basic entry file and the bare bones of all 3 scripts outlined above.  Learn the basics of `Easel.js`.  Goals for the day:
+```Javascript
+draw(ctx, cellDim, base){
+	if (this.n === -1){
+		return;
+	}
 
-- Get a green bundle with `webpack`
-- Learn enough `Easel.js` to render an object to the `Canvas` element
+	let fontSize;
+	if (cellDim <= 14){
+		fontSize = 0;
+	} else if (cellDim <= 23){
+		fontSize = 4;
+	} else if (cellDim <= 30){
+		fontSize = 6;
+	} else if (cellDim <= 40){
+		fontSize = 8;
+	}else if (cellDim <= 53){
+		fontSize = 10;
+	} else if (cellDim <= 77){
+		fontSize = 14;
+	} else {
+		fontSize = 24;
+	}
 
-**Day 2**: Dedicate this day to learning the `Easel.js` API.  First, build out the `Cell` object to connect to the `Board` object.  Then, use `board.js` to create and render at least the square grid. Goals for the day:
+	const number = JSON.stringify(Math.round(Math.pow(base, this.n) * 100)/100);
+	const dec = number.length - 4;
 
-- Complete the `cell.js` module (constructor, update functions)
-- Render a square grid to the `Canvas` using `Easel.js`
-- Make each cell in the grid tilt, toggling tilt with arrow keys
+	fontSize = dec > 0 ? Math.floor(fontSize * Math.pow(.9, dec)) : fontSize;
 
-**Day 3**: Create the backend. Incorporate the logic into the `board.js` rendering.  Goals for the day:
+	ctx.font = `100 ${fontSize}pt sans-serif`;
+	ctx.textAlign = 'center';
+	ctx.textBaseline = 'middle';
 
-- Export an `Game` object with correct parameters and handling logic
-- Have a functional grid on the `Canvas` frontend that correctly handles moves
+	const [x, y] = [this.j * cellDim, this.i * cellDim];
 
-**Day 4**: Install the inputs for the user to interact with the game.  Style the frontend, making it polished and professional.  Goals for the day:
+	ctx.fillStyle = this.n === 11 ? '#ffd700' : COLORS[this.n % 10];
+	ctx.fillRect(x, y, cellDim, cellDim);
 
-- Create controls for reset, grid size, base
-- Have a styled `Canvas`, nice looking controls and title
+	ctx.fillStyle = 'white';
+	ctx.fillText(number, x + cellDim / 2, y + cellDim / 2);
+}
+```
