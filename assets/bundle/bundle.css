@@ -1,0 +1,146 @@
+body {
+  background-color: #001b10;
+  color: white;
+  font-family: 'Roboto';
+  font-weight: 300;
+  margin: 50px 0; }
+
+button {
+  padding: 5px 10px;
+  font-family: 'Roboto';
+  background-color: green;
+  border-radius: 5px;
+  border: 1px solid white;
+  font-weight: 200;
+  font-size: 16px;
+  background-color: transparent;
+  color: white; }
+
+.header-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 500px;
+  margin: 30px auto; }
+  .header-container h1 {
+    width: 100%;
+    font-weight: 200;
+    font-size: 60px;
+    margin: 0;
+    margin-bottom: 20px;
+    padding: 0; }
+  .header-container h3 {
+    margin: 0;
+    padding: 3px 0 0 0;
+    font-weight: 200;
+    font-size: 16px;
+    vertical-align: middle; }
+    .header-container h3 strong {
+      font-weight: 400; }
+
+.game-container {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  padding: 0; }
+  .game-container .forms {
+    padding-left: 30px; }
+    .game-container .forms form {
+      padding-bottom: 20px; }
+      .game-container .forms form header {
+        padding: 10px 5px;
+        display: flex; }
+      .game-container .forms form input {
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 14px;
+        background-color: transparent;
+        color: white;
+        outline: 0;
+        outline-offset: 0;
+        box-shadow: none;
+        border: 2px solid white; }
+      .game-container .forms form h6 {
+        margin-top: 20px;
+        font-weight: 300;
+        font-size: 12px; }
+
+.grid-container {
+  border: 2px solid #4B72CC;
+  border-radius: 5px;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  background-color: transparent;
+  position: relative; }
+  .grid-container canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1; }
+  .grid-container div {
+    z-index: 2; }
+  .grid-container .alert {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    background-color: white;
+    opacity: .5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-size: 48px;
+    font-weight: bold; }
+    .grid-container .alert caption {
+      margin: 20px auto;
+      opacity: 1;
+      z-index: 4; }
+    .grid-container .alert button {
+      margin: 20px auto;
+      color: black;
+      border: 1px solid black;
+      opacity: 1;
+      z-index: 4; }
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  width: 400px;
+  margin: auto; }
+  .footer strong {
+    font-weight: 700;
+    letter-spacing: normal; }
+  .footer img {
+    height: 40px;
+    width: 40px;
+    margin: auto; }
+  .footer div {
+    font-weight: 200;
+    font-size: 14px;
+    padding: 20px 0 30px 0;
+    border-bottom: 1px solid white;
+    line-height: 22px;
+    text-align: justify;
+    letter-spacing: 1px; }
+  .footer aside {
+    padding: 50px 0 20px 0;
+    font-size: 14px;
+    font-weight: 200;
+    text-align: center;
+    letter-spacing: .5px; }
+  .footer a {
+    color: white;
+    font-weight: 400;
+    letter-spacing: 0;
+    font-size: 14px; }
+
+/*# sourceMappingURL=bundle.css.map */
