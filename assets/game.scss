@@ -29,8 +29,8 @@ button{
 
 	h1{
 		width: 100%;
-		font-family: 'Domine';
-		font-weight: 400;
+		font-family: 'Lobster';
+		font-weight: 200;
 		font-size: 60px;
 		margin: 0;
 		margin-bottom: 20px;
@@ -163,7 +163,7 @@ button{
 }
 
 .grid-container{
-	border: 5px solid #6ccbf9;
+	border: 1px solid #6ccbf9;
 	border-radius: 5px;
 
 	display: flex;
@@ -185,6 +185,7 @@ button{
 	div{
 		z-index: 3;
 		border-color: #6ccbf9;
+		font-family: 'Roboto';
 	}
 
 	.alert{

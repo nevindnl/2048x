@@ -26,8 +26,8 @@ button {
   margin: 30px auto; }
   .header-container h1 {
     width: 100%;
-    font-family: 'Domine';
-    font-weight: 400;
+    font-family: 'Lobster';
+    font-weight: 200;
     font-size: 60px;
     margin: 0;
     margin-bottom: 20px;
@@ -125,7 +125,7 @@ button {
           background-color: #008080; }
 
 .grid-container {
-  border: 5px solid #6ccbf9;
+  border: 1px solid #6ccbf9;
   border-radius: 5px;
   display: flex;
   align-items: flex-start;
@@ -141,7 +141,8 @@ button {
     z-index: 1; }
   .grid-container div {
     z-index: 3;
-    border-color: #6ccbf9; }
+    border-color: #6ccbf9;
+    font-family: 'Roboto'; }
   .grid-container .alert {
     position: absolute;
     top: 0;
