@@ -84,10 +84,13 @@ drawGrid(){
 		div.remove();
 	});
 
-	document.getElementsByClassName('grid-container')[0].style.width = this.dim + 'px';
-	document.getElementsByClassName('grid-container')[0].style.height = this.dim + 'px';
-	document.getElementsByTagName('canvas')[0].height = this.dim;
-	document.getElementsByTagName('canvas')[0].width = this.dim;
+	const grid = 	document.getElementsByClassName('grid-container')[0];
+	const canvas = 	document.getElementsByTagName('canvas')[0];
+
+	grid.style.width = this.dim + 'px';
+	grid.style.height = this.dim + 'px';
+	canvas.width = this.dim;
+	canvas.height = this.dim;
 
 	const cellDim = this.cellDim - 2 * this.cellBorder + 'px';
 	for (let i = 0; i < Math.pow(this.size, 2); i++){
@@ -95,7 +98,7 @@ drawGrid(){
 		div.style.width = cellDim;
 		div.style.height = cellDim;
 		div.style.border = `${this.cellBorder}px solid #6ccbf9`;
-		document.getElementsByClassName('grid-container')[0].appendChild(div);
+		grid.appendChild(div);
 	}
 }
 ```
