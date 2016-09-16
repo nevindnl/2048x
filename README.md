@@ -1,4 +1,6 @@
-## 2048
+## 2048x
+
+[live](https://nevindnl.github.io/2048x)
 
 ### Background
 
