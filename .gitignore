@@ -1,1 +1,4 @@
 .sass-cache/*
+.gitignore
+package.json
+webpack.config.js
