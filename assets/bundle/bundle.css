@@ -21,11 +21,12 @@ button {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
-  width: 500px;
+  width: 510px;
   margin: 30px auto; }
   .header-container h1 {
     width: 100%;
-    font-weight: 200;
+    font-family: 'Domine';
+    font-weight: 400;
     font-size: 60px;
     margin: 0;
     margin-bottom: 20px;
@@ -44,14 +45,16 @@ button {
   justify-content: center;
   margin: auto;
   padding: 0; }
-  .game-container .forms {
-    padding-left: 30px; }
-    .game-container .forms form {
+  .game-container .form {
+    padding-left: 30px;
+    display: flex;
+    align-items: center; }
+    .game-container .form form {
       padding-bottom: 20px; }
-      .game-container .forms form header {
-        padding: 10px 5px;
+      .game-container .form form header {
+        padding: 15px 5px;
         display: flex; }
-      .game-container .forms form input {
+      .game-container .form form input {
         padding: 10px;
         border-radius: 5px;
         font-size: 14px;
@@ -61,13 +64,67 @@ button {
         outline-offset: 0;
         box-shadow: none;
         border: 2px solid white; }
-      .game-container .forms form h6 {
+      .game-container .form form h6 {
+        padding-left: 2px;
         margin-top: 20px;
         font-weight: 300;
         font-size: 12px; }
+      .game-container .form form button {
+        margin: auto;
+        float: right; }
+      .game-container .form form .switch {
+        position: relative;
+        display: flex;
+        justify-content: flex-start;
+        padding-left: 5px;
+        padding-top: 20px;
+        padding-bottom: 40px;
+        width: 100%; }
+        .game-container .form form .switch input {
+          position: absolute;
+          margin-left: -9999px;
+          visibility: hidden; }
+        .game-container .form form .switch input + label {
+          margin-left: 10px;
+          position: relative;
+          display: block;
+          outline: none;
+          cursor: pointer;
+          user-select: none;
+          padding: 2px;
+          width: 40px;
+          height: 15px;
+          background-color: #dddddd;
+          border-radius: 20px;
+          transition: background 0.4s; }
+          .game-container .form form .switch input + label:before, .game-container .form form .switch input + label:after {
+            display: block;
+            position: absolute;
+            content: ""; }
+          .game-container .form form .switch input + label:before {
+            top: 2px;
+            left: 2px;
+            bottom: 2px;
+            width: 40px;
+            background-color: #fff;
+            border-radius: 40px;
+            transition: background 0.4s; }
+          .game-container .form form .switch input + label:after {
+            top: 4px;
+            left: 4px;
+            bottom: 4px;
+            width: 18px;
+            background-color: #dddddd;
+            border-radius: 18px;
+            transition: margin 0.4s, background 0.4s; }
+        .game-container .form form .switch input:checked + label:before {
+          background-color: #008080; }
+        .game-container .form form .switch input:checked + label:after {
+          margin-left: 20px;
+          background-color: #008080; }
 
 .grid-container {
-  border: 2px solid #4B72CC;
+  border: 5px solid #6ccbf9;
   border-radius: 5px;
   display: flex;
   align-items: flex-start;
@@ -82,14 +139,15 @@ button {
     bottom: 0;
     z-index: 1; }
   .grid-container div {
-    z-index: 2; }
+    z-index: 3;
+    border-color: #6ccbf9; }
   .grid-container .alert {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 3;
+    z-index: 4;
     background-color: white;
     opacity: .5;
     display: flex;
@@ -102,13 +160,13 @@ button {
     .grid-container .alert caption {
       margin: 20px auto;
       opacity: 1;
-      z-index: 4; }
+      z-index: 5; }
     .grid-container .alert button {
       margin: 20px auto;
       color: black;
       border: 1px solid black;
       opacity: 1;
-      z-index: 4; }
+      z-index: 5; }
 
 .footer {
   display: flex;
@@ -132,11 +190,11 @@ button {
     text-align: justify;
     letter-spacing: 1px; }
   .footer aside {
-    padding: 50px 0 20px 0;
+    padding: 50px 0 25px 0;
     font-size: 14px;
     font-weight: 200;
     text-align: center;
-    letter-spacing: .5px; }
+    letter-spacing: 1px; }
   .footer a {
     color: white;
     font-weight: 400;

@@ -4,6 +4,7 @@
 		<meta charset="utf-8">
 		<title>2048x</title>
 		<link rel="stylesheet" media="all" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;amp;lang=en">
+		<link rel="stylesheet" media="all" href="https://fonts.googleapis.com/css?family=Domine:regular,bold,italic,thin,light,bolditalic,black,medium&amp;amp;lang=en">
 		<link rel="stylesheet" type="text/css" href="./assets/bundle/bundle.css" />
 		<script type="text/javascript" src='./lib/bundle/bundle.js'></script>
 	</head>
@@ -17,15 +18,20 @@
 			<div class="grid-container">
 				<canvas id='canvas'></canvas>
 			</div>
-			<div class="forms">
-				<form class='number-form'>
+			<div class="form">
+				<form>
+					<div class="switch">
+						infinite
+						<input id='toggle' type="checkbox" val='infinite'>
+						<label for='toggle'></label>
+					</div>
+
 					<header>base</header>
 					<input type='text' val='base' placeholder='2'></input>
-				</form>
-				<form class='size-form'>
 					<header>board size</header>
 					<input type='text' val='size' placeholder='4'></input>
-					<h6>(between 3 and 100)</h6>
+					<h6>(between 3 and 50)</h6>
+					<button type='submit'>create</button>
 				</form>
 			</div>
 		</div>
