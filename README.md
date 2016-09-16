@@ -66,7 +66,7 @@ leftTilt(){
 			j += 1;
 		}
 
-		//append spaces as needed
+		//add space as needed
 		while(tilted.length < this.size){
 			tilted.push(new Cell(-1));
 		}
@@ -76,7 +76,7 @@ leftTilt(){
 }
 ```
 
-DOM methods were used to render the grid:
+DOM methods were used to render the grid,
 
 ```Javascript
 drawGrid(){
@@ -89,6 +89,7 @@ drawGrid(){
 
 	grid.style.width = this.dim + 'px';
 	grid.style.height = this.dim + 'px';
+	grid.style.border = `${this.gridBorder}px solid #${this.gridColor}`;
 	canvas.width = this.dim;
 	canvas.height = this.dim;
 
@@ -97,7 +98,7 @@ drawGrid(){
 		const div = document.createElement('div');
 		div.style.width = cellDim;
 		div.style.height = cellDim;
-		div.style.border = `${this.cellBorder}px solid #6ccbf9`;
+		div.style.border = `${this.cellBorder}px solid #${this.gridColor}`;
 		grid.appendChild(div);
 	}
 }
@@ -120,20 +121,20 @@ draw(ctx, cellDim, base){
 		fontSize = 6;
 	} else if (cellDim <= 40){
 		fontSize = 8;
-	}else if (cellDim <= 53){
+	} else if (cellDim <= 53){
 		fontSize = 10;
 	} else if (cellDim <= 77){
 		fontSize = 14;
 	} else {
-		fontSize = 24;
+		fontSize = 22;
 	}
 
 	const number = JSON.stringify(Math.round(Math.pow(base, this.n) * 100)/100);
 	const dec = number.length - 4;
 
-	fontSize = dec > 0 ? Math.floor(fontSize * Math.pow(.9, dec)) : fontSize;
+	fontSize = dec > 0 ? Math.floor(fontSize * Math.pow(.87, dec)) : fontSize;
 
-	ctx.font = `100 ${fontSize}pt sans-serif`;
+	ctx.font = `100 ${fontSize}pt Arial`;
 	ctx.textAlign = 'center';
 	ctx.textBaseline = 'middle';
 
