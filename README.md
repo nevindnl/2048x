@@ -24,55 +24,55 @@ Tilting was implemented by mapping the grid, according to the tilt direction, to
 
 ```Javascript
 tilt(i, j){
-	function toLeft(){
-		if (j !== 0){
-			this.grid = Util.transpose(this.grid);
-		}
-		if (i + j > 0){
-			this.grid = this.grid.map(row => row.reverse());
-		}
-	}
+  function toLeft(){
+    if (j !== 0){
+      this.grid = Util.transpose(this.grid);
+    }
+    if (i + j > 0){
+      this.grid = this.grid.map(row => row.reverse());
+    }
+  }
 
-	function fromLeft(){
-		if (i + j > 0){
-			this.grid = this.grid.map(row => row.reverse());
-		}
-		if (j !== 0){
-			this.grid = Util.transpose(this.grid);
-		}
-	}
+  function fromLeft(){
+    if (i + j > 0){
+      this.grid = this.grid.map(row => row.reverse());
+    }
+    if (j !== 0){
+      this.grid = Util.transpose(this.grid);
+    }
+  }
 
-	toLeft.call(this);
-	this.leftTilt();
-	fromLeft.call(this);
+  toLeft.call(this);
+  this.leftTilt();
+  fromLeft.call(this);
 }
 
 leftTilt(){
-	this.grid = this.grid.map(row => {
-		//remove spaces
-		const tilted = row.filter(cell => cell.n !== -1);
+  this.grid = this.grid.map(row => {
+    //remove spaces
+    const tilted = row.filter(cell => cell.n !== -1);
 
-		//merge
-		let j = 0;
-		while(j < tilted.length - 1){
-			let [cell, nextCell] = tilted.slice(j, j + 2);
+    //merge
+    let j = 0;
+    while(j < tilted.length - 1){
+      let [cell, nextCell] = tilted.slice(j, j + 2);
 
-			if (cell.n === nextCell.n){
-				cell.n += 1;
-				cell.merged = true;
-				tilted.splice(j + 1, 1);
-			}
+    if (cell.n === nextCell.n){
+      cell.n += 1;
+      cell.merged = true;
+      tilted.splice(j + 1, 1);
+    }
 
-			j += 1;
-		}
+      j += 1;
+    }
 
-		//add space as needed
-		while(tilted.length < this.size){
-			tilted.push(new Cell(-1));
-		}
+    //add space as needed
+    while(tilted.length < this.size){
+      tilted.push(new Cell(-1));
+    }
 
-		return tilted;
-	});
+    return tilted;
+  });
 }
 ```
 
@@ -80,27 +80,27 @@ DOM methods were used to render the grid,
 
 ```Javascript
 drawGrid(){
-	document.querySelectorAll('.grid-container div').forEach(div => {
-		div.remove();
-	});
+  document.querySelectorAll('.grid-container div').forEach(div => {
+    div.remove();
+  });
 
-	const grid = 	document.getElementsByClassName('grid-container')[0];
-	const canvas = 	document.getElementsByTagName('canvas')[0];
+  const grid = 	document.getElementsByClassName('grid-container')[0];
+  const canvas = 	document.getElementsByTagName('canvas')[0];
 
-	grid.style.width = this.dim + 'px';
-	grid.style.height = this.dim + 'px';
-	grid.style.border = `${this.gridBorder}px solid #${this.gridColor}`;
-	canvas.width = this.dim;
-	canvas.height = this.dim;
+  grid.style.width = this.dim + 'px';
+  grid.style.height = this.dim + 'px';
+  grid.style.border = `${this.gridBorder}px solid #${this.gridColor}`;
+  canvas.width = this.dim;
+  canvas.height = this.dim;
 
-	const cellDim = this.cellDim - 2 * this.cellBorder + 'px';
-	for (let i = 0; i < Math.pow(this.size, 2); i++){
-		const div = document.createElement('div');
-		div.style.width = cellDim;
-		div.style.height = cellDim;
-		div.style.border = `${this.cellBorder}px solid #${this.gridColor}`;
-		grid.appendChild(div);
-	}
+  const cellDim = this.cellDim - 2 * this.cellBorder + 'px';
+  for (let i = 0; i < Math.pow(this.size, 2); i++){
+    const div = document.createElement('div');
+    div.style.width = cellDim;
+    div.style.height = cellDim;
+    div.style.border = `${this.cellBorder}px solid #${this.gridColor}`;
+    grid.appendChild(div);
+  }
 }
 ```
 
@@ -108,42 +108,42 @@ whereas HTML5 Canvas was used to render individual cells.
 
 ```Javascript
 draw(ctx, cellDim, base){
-	if (this.n === -1){
-		return;
-	}
+  if (this.n === -1){
+    return;
+  }
 
-	let fontSize;
-	if (cellDim <= 14){
-		fontSize = 0;
-	} else if (cellDim <= 23){
-		fontSize = 4;
-	} else if (cellDim <= 30){
-		fontSize = 6;
-	} else if (cellDim <= 40){
-		fontSize = 8;
-	} else if (cellDim <= 53){
-		fontSize = 10;
-	} else if (cellDim <= 77){
-		fontSize = 14;
-	} else {
-		fontSize = 22;
-	}
+  let fontSize;
+  if (cellDim <= 14){
+    fontSize = 0;
+  } else if (cellDim <= 23){
+    fontSize = 4;
+  } else if (cellDim <= 30){
+    fontSize = 6;
+  } else if (cellDim <= 40){
+    fontSize = 8;
+  } else if (cellDim <= 53){
+    fontSize = 10;
+  } else if (cellDim <= 77){
+    fontSize = 14;
+  } else {
+    fontSize = 22;
+  }
 
-	const number = JSON.stringify(Math.round(Math.pow(base, this.n) * 100)/100);
-	const dec = number.length - 4;
+  const number = JSON.stringify(Math.round(Math.pow(base, this.n) * 100)/100);
+  const dec = number.length - 4;
 
-	fontSize = dec > 0 ? Math.floor(fontSize * Math.pow(.87, dec)) : fontSize;
+  fontSize = dec > 0 ? Math.floor(fontSize * Math.pow(.87, dec)) : fontSize;
 
-	ctx.font = `100 ${fontSize}pt Arial`;
-	ctx.textAlign = 'center';
-	ctx.textBaseline = 'middle';
+  ctx.font = `100 ${fontSize}pt Arial`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
 
-	const [x, y] = [this.j * cellDim, this.i * cellDim];
+  const [x, y] = [this.j * cellDim, this.i * cellDim];
 
-	ctx.fillStyle = this.n === 11 ? '#ffd700' : COLORS[this.n % 10];
-	ctx.fillRect(x, y, cellDim, cellDim);
+  ctx.fillStyle = this.n === 11 ? '#ffd700' : COLORS[this.n % 10];
+  ctx.fillRect(x, y, cellDim, cellDim);
 
-	ctx.fillStyle = 'white';
-	ctx.fillText(number, x + cellDim / 2, y + cellDim / 2);
+  ctx.fillStyle = 'white';
+  ctx.fillText(number, x + cellDim / 2, y + cellDim / 2);
 }
 ```
