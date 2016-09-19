@@ -1,0 +1,29 @@
+{
+  "name": "2048x",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/nevindnl/2048x.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nevindnl/2048x/issues"
+  },
+  "homepage": "https://github.com/nevindnl/2048x#readme",
+  "dependencies": {
+    "babel-core": "^6.14.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.14.0",
+    "easeljs-loader": "^0.1.2",
+    "jquery": "^3.1.0",
+    "webpack": "^1.13.2"
+  }
+}

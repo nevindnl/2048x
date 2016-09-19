@@ -2,7 +2,7 @@
 
 [Live](https://nevindnl.github.io/2048x)
 
-2048x is a spinoff of the popular web game 2048, allowing the player to adjust the number base and grid size. It was made with JavaScript, HTML5/CSS3, and some jQuery.
+2048x is a spinoff of the popular web game 2048, allowing the player to adjust the number base and grid size. It was built with JavaScript, HTML5/CSS3, and some jQuery.
 
 ![image of splash](./screenshots/splash.png)
 ![image of 7](./screenshots/7.png)
