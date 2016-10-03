@@ -84,8 +84,8 @@ drawGrid(){
     div.remove();
   });
 
-  const grid = 	document.getElementsByClassName('grid-container')[0];
-  const canvas = 	document.getElementsByTagName('canvas')[0];
+  const grid = document.getElementsByClassName('grid-container')[0];
+  const canvas = document.getElementsByTagName('canvas')[0];
 
   grid.style.width = this.dim + 'px';
   grid.style.height = this.dim + 'px';
@@ -129,10 +129,12 @@ draw(ctx, cellDim, base){
     fontSize = 22;
   }
 
+  // round to two decimal places
   const number = JSON.stringify(Math.round(Math.pow(base, this.n) * 100)/100);
-  const dec = number.length - 4;
 
-  fontSize = dec > 0 ? Math.floor(fontSize * Math.pow(.87, dec)) : fontSize;
+	// resize longer numbers
+  const resizeFactor = number.length - 4;
+  fontSize = resizeFactor > 0 ? Math.floor(fontSize * Math.pow(.87, resizeFactor)) : fontSize;
 
   ctx.font = `100 ${fontSize}pt Arial`;
   ctx.textAlign = 'center';
