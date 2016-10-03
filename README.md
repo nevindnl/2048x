@@ -146,6 +146,6 @@ draw(ctx, cellDim, base){
   ctx.fillRect(x, y, cellDim, cellDim);
 
   ctx.fillStyle = 'white';
-  ctx.fillText(number, x + cellDim/2, y + cellDim/2);
+  ctx.fillText(number, x + cellDim / 2, y + cellDim / 2);
 }
 ```
