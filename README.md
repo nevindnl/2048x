@@ -80,6 +80,7 @@ DOM methods were used to render the grid,
 
 ```Javascript
 drawGrid(){
+	// remove old cells
   document.querySelectorAll('.grid-container div').forEach(div => {
     div.remove();
   });
@@ -94,6 +95,8 @@ drawGrid(){
   canvas.height = this.dim;
 
   const cellDim = this.cellDim - 2 * this.cellBorder + 'px';
+
+	// add new cells
   for (let i = 0; i < Math.pow(this.size, 2); i++){
     const div = document.createElement('div');
     div.style.width = cellDim;
