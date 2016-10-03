@@ -20,7 +20,7 @@
   [board]: ./lib/board.js
   [game]: ./lib/game.js
 
-Tilting was implemented by mapping the grid, according to the tilt direction, to a grid to be left-tilted, left-tilting, and then undoing the isomorphism.
+Tilting maps the grid, according to the tilt direction, to a grid to be left-tilted, left-tilts, and then undoes the isomorphism.
 
 ```Javascript
 tilt(i, j){
@@ -76,7 +76,7 @@ leftTilt(){
 }
 ```
 
-DOM methods were used to render the grid,
+DOM methods are used to render the grid,
 
 ```Javascript
 drawGrid(){
@@ -107,7 +107,7 @@ drawGrid(){
 }
 ```
 
-whereas HTML5 Canvas was used to render individual cells.
+whereas HTML5 Canvas is used to render individual cells.
 
 ```Javascript
 draw(ctx, cellDim, base){
