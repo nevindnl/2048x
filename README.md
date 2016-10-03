@@ -132,7 +132,7 @@ draw(ctx, cellDim, base){
   // round to two decimal places
   const number = JSON.stringify(Math.round(Math.pow(base, this.n) * 100)/100);
 
-	// resize longer numbers
+  // resize longer numbers
   const resizeFactor = number.length - 4;
   fontSize = resizeFactor > 0 ? Math.floor(fontSize * Math.pow(.87, resizeFactor)) : fontSize;
 
@@ -146,6 +146,6 @@ draw(ctx, cellDim, base){
   ctx.fillRect(x, y, cellDim, cellDim);
 
   ctx.fillStyle = 'white';
-  ctx.fillText(number, x + cellDim / 2, y + cellDim / 2);
+  ctx.fillText(number, x + cellDim/2, y + cellDim/2);
 }
 ```
